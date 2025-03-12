@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Scrollable List</string>
+    <string name="affirmation1">"You are capable of amazing things."</string>
+    <string name="affirmation2">"Believe in yourself and all that you are."</string>
+    <string name="affirmation3">"Every day is a fresh start."</string>
+    <string name="affirmation4">"You are stronger than you think."</string>
+    <string name="affirmation5">"Positivity always wins."</string>
+</resources>
