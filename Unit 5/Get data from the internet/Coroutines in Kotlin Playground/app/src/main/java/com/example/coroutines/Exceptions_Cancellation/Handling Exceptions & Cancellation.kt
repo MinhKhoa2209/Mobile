@@ -1,24 +1,36 @@
-package com.example.coroutines
+package com.example.coroutines.Exceptions_Cancellation
 
 import kotlinx.coroutines.*
 
-fun main() = runBlocking {
-    val job = launch {
+fun main() {
+    runBlocking {
+        println("Weather forecast")
+        println(getWeatherReport())
+        println("Have a good day!")
+    }
+}
+
+suspend fun getWeatherReport() = coroutineScope {
+    val forecast = async { getForecast() }
+    val temperature = async {
         try {
-            repeat(5) { i ->
-                println("Task running: $i")
-                delay(500)
-            }
-        } catch (e: CancellationException) {
-            println("Coroutine was cancelled!")
-        } finally {
-            println("Cleanup after cancellation")
+            getTemperature()
+        } catch (e: AssertionError) {
+            println("Caught exception $e")
+            "{ No temperature found }"
         }
     }
 
-    delay(1200)
-    println("Cancelling coroutine...")
-    job.cancel()
-    job.join()
-    println("Main program exits")
+    "${forecast.await()} ${temperature.await()}"
+}
+
+suspend fun getForecast(): String {
+    delay(1000)
+    return "Sunny"
+}
+
+suspend fun getTemperature(): String {
+    delay(500)
+    throw AssertionError("Temperature is invalid")
+    return "30\u00b0C"
 }

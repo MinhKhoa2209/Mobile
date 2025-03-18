@@ -1,38 +1,45 @@
 package com.example.bookshelf.ui
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.bookshelf.R
+import com.example.bookshelf.ui.screens.BookScreen
 import com.example.bookshelf.viewmodel.BooksViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BookshelfApp(viewModel: BooksViewModel = hiltViewModel()) {
-    val books by viewModel.books.collectAsState()
+fun BookShelfApp() {
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.headlineMedium,
 
-    LaunchedEffect(Unit) { viewModel.fetchBooks("android") }
-
-    LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-        items(books.size) { index ->
-            val book = books[index]
-            Column(modifier = Modifier.padding(8.dp)) {
-                book.volumeInfo.imageLinks?.thumbnail?.let { url ->
-                    Image(
-                        painter = rememberImagePainter(url),
-                        contentDescription = book.volumeInfo.title,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.height(150.dp).fillMaxWidth()
                     )
                 }
-                Text(text = book.volumeInfo.title, modifier = Modifier.padding(8.dp))
-            }
+            )
+        }
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            val bookshelfViewModel: BooksViewModel =
+                viewModel(factory = BooksViewModel.Factory)
+            BookScreen(
+                booksUiState = bookshelfViewModel.booksUiState,
+                retryAction = bookshelfViewModel::getBooks,
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = it
+            )
         }
     }
 }

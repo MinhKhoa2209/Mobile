@@ -10,7 +10,6 @@ interface AmphibiansRepository {
 }
 
 class DefaultAmphibiansRepository(
-    private val amphibiansApiService: AmphibiansApiService
-) : AmphibiansRepository {
+    private val amphibiansApiService: AmphibiansApiService) : AmphibiansRepository {
     override suspend fun getAmphibians(): List<Amphibian> = amphibiansApiService.getAmphibians()
 }

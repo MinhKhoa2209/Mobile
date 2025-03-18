@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.amphibians"
+    namespace = "com.example.bookshelf"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.amphibians"
+        applicationId = "com.example.bookshelf"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -41,7 +41,6 @@ android {
 }
 
 dependencies {
-
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
     implementation("androidx.activity:activity-compose:1.9.3")
     implementation("androidx.activity:activity-ktx:1.9.3")
@@ -57,6 +56,14 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:${rootProject.extra["retrofit2_version"]}")
     implementation("io.coil-kt:coil-compose:2.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+    implementation(libs.androidx.junit.ktx)
+    implementation(libs.books)
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")
+    testImplementation("junit:junit:4.13.2")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }
+

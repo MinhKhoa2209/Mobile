@@ -21,7 +21,7 @@ import com.example.superheroesapp.R
 
 @Composable
 fun SuperheroScreen() {
-    var darkTheme by remember { mutableStateOf(false) }  // Trạng thái dark mode
+    var darkTheme by remember { mutableStateOf(false) }
     val backgroundColor = if (darkTheme) DarkBackground else LightBackground
     val textColor = if (darkTheme) DarkText else LightText
     val cardColor = if (darkTheme) DarkCard else LightCard
@@ -34,7 +34,7 @@ fun SuperheroScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { darkTheme = !darkTheme }, // Khi bấm, đổi trạng thái
+            onClick = { darkTheme = !darkTheme },
             modifier = Modifier.padding(8.dp)
         ) {
             Text(text = if (darkTheme) "Switch to Light Mode" else "Switch to Dark Mode")
@@ -106,12 +106,12 @@ fun SuperheroCard(hero: Hero, cardColor: Color, textColor: Color) {
 data class Hero(val name: String, val description: String, val imageRes: Int)
 
 val heroes = listOf(
-    Hero("Nick the Night and Day", "The Jetpack Hero", R.drawable.superhero1),
-    Hero("Reality Protector", "Understands the absolute truth", R.drawable.superhero2),
-    Hero("Andre the Giant", "Mimics the light and night to blend in", R.drawable.superhero3),
-    Hero("Benjamin the Brave", "Harnesses the power of canary to develop bravely", R.drawable.superhero4),
-    Hero("Magnificent Maru", "Effortlessly glides in to save the day", R.drawable.superhero5),
-    Hero("Dynamic Yasmine", "Ability to shift to any form and energize", R.drawable.superhero6)
+    Hero("Iron Man", "Genius, billionaire, playboy, philanthropist", R.drawable.superhero1),
+    Hero("Thor", "God of Thunder, wields Mjolnir", R.drawable.superhero2),
+    Hero("Hulk", "Unleashes unstoppable rage and strength", R.drawable.superhero3),
+    Hero("Captain America", "Super soldier with an unbreakable shield", R.drawable.superhero4),
+    Hero("Spider-Man", "Agile wall-crawler with spider senses", R.drawable.superhero5),
+    Hero("Hawkeye", "Master marksman with unparalleled precision", R.drawable.superhero6)
 )
 
 // Định nghĩa màu sắc cho Dark/Light mode
