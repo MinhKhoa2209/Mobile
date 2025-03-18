@@ -16,9 +16,9 @@ fun main() = runBlocking {
         }
     }
 
-    delay(1200) // Chờ một chút rồi hủy
+    delay(1200)
     println("Cancelling coroutine...")
     job.cancel()
-    job.join() // Chờ coroutine dừng hoàn toàn
+    job.join()
     println("Main program exits")
 }
